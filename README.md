@@ -3,7 +3,8 @@
 ### An Express Server that Implements Oauth Login Workflow
 
 ---
-**this content is built on top of cookies and sessions described [here](https://github.com/pckosek/Express_Cookies_and_Sessions)**
+this content is built on top of cookies and sessions described [here](https://github.com/pckosek/Express_Cookies_and_Sessions)
+
 ---
 
 

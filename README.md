@@ -2,7 +2,9 @@
 
 ### An Express Server that Implements Oauth Login Workflow
 
+---
 **this content is built on top of cookies and sessions described [here](https://github.com/pckosek/Express_Cookies_and_Sessions)**
+---
 
 
 Each of these videos demonstrates a step in the Oauth workflow, leading up to 05_minimal_working_oauth, which could be considered a minimal working example.

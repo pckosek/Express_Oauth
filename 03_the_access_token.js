@@ -3,7 +3,7 @@
 // -------------- load packages -------------- //
 var cookieSession = require('cookie-session')
 var express = require('express')
-var simpleoauth2 = require('simple-oauth2');
+const {  AuthorizationCode } = require('simple-oauth2');
 var app = express();
 
 var hbs = require('hbs');
@@ -37,7 +37,7 @@ var ion_redirect_uri = 'https://user.tjhsst.edu/pckosek/login_worker';    //    
 
 // Here we create an oauth2 variable that we will use to manage out OAUTH operations
 
-var oauth2 = simpleoauth2.create({
+var client = new AuthorizationCode({
   client: {
     id: ion_client_id,
     secret: ion_client_secret,
@@ -52,7 +52,7 @@ var oauth2 = simpleoauth2.create({
 // This is the link that will be used later on for logging in. This URL takes
 // you to the ION server and asks if you are willing to give read permission to ION.
 
-var authorizationUri = oauth2.authorizationCode.authorizeURL({
+var authorizationUri = client.authorizeURL({
     scope: "read",
     redirect_uri: ion_redirect_uri
 });
@@ -80,11 +80,10 @@ async function convertCodeToToken(req, res, next) {
     
     // needed to be in try/catch
     try {
-        var result = await oauth2.authorizationCode.getToken(options);      // await serializes asyncronous fcn call
-        var SeverReponseToken = oauth2.accessToken.create(result);
-        console.log(SeverReponseToken)
+        var accessToken = await client.getToken(options);      // await serializes asyncronous fcn call
+        console.log(accessToken)
         
-        res.locals.token = SeverReponseToken.token;
+        res.locals.token = accessToken.token;
         next()
     } 
     catch (error) {
@@ -105,6 +104,6 @@ app.get('/login_worker', [convertCodeToToken], function(req, res) {
 
 // -------------- express listener -------------- //
 
-var listener = app.listen(app.get('port'), function() {
-  console.log( 'Express server started on port: '+listener.address().port );
+var listener = app.listen(process.env.PORT || 8080, process.env.HOST || "0.0.0.0", function() {
+    console.log("Express server started");
 });

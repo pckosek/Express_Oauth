@@ -3,7 +3,7 @@
 // -------------- load packages -------------- //
 var cookieSession = require('cookie-session')
 var express = require('express')
-var simpleoauth2 = require('simple-oauth2');
+const {  AuthorizationCode } = require('simple-oauth2');
 var app = express();
 
 var hbs = require('hbs');
@@ -31,13 +31,15 @@ app.use(cookieSession({
 // -- The redirect uri should be some intermediary 'get' request that 
 //     you write in whichyou assign the token to the session.
 
+//  YOU GET THESE PARAMETERS BY REGISTERING AN APP HERE: https://ion.tjhsst.edu/oauth/applications/    
+
 var ion_client_id = 'UbHVu4OiHCtMI8pJUCh0NG1dNoX3VCm5CYd9dzmI';
 var ion_client_secret = 'ylVjx8PJhSjtCl74BIUzHmqHHPbJK4tv803psudjjKQGztHBIejbV1ey9K0KfxVKmENaaSTDZ8E67SnjBvgFcY5ZGbIcAsnZXU0f0yRmSaUQYsmhdRIvTVXCZRaii2jX';
 var ion_redirect_uri = 'https://user.tjhsst.edu/pckosek/login_worker';    //    <<== you choose this one
 
 // Here we create an oauth2 variable that we will use to manage out OAUTH operations
 
-var oauth2 = simpleoauth2.create({
+var client = new AuthorizationCode({
   client: {
     id: ion_client_id,
     secret: ion_client_secret,
@@ -52,7 +54,7 @@ var oauth2 = simpleoauth2.create({
 // This is the link that will be used later on for logging in. This URL takes
 // you to the ION server and asks if you are willing to give read permission to ION.
 
-var authorizationUri = oauth2.authorizationCode.authorizeURL({
+var authorizationUri = client.authorizeURL({
     scope: "read",
     redirect_uri: ion_redirect_uri
 });

@@ -12,8 +12,6 @@ app.set('trust proxy', 1) // trust first proxy
 
 // -------------- express initialization -------------- //
 
-// Here, we set the port (these settings are specific to our site)
-app.set('port', process.env.PORT || 8080 );
 app.set('view engine', 'hbs');
 
 app.use(cookieSession({
@@ -81,6 +79,6 @@ app.get('/login_worker', function(req, res) {
 
 // -------------- express listener -------------- //
 
-var listener = app.listen(app.get('port'), function() {
-  console.log( 'Express server started on port: '+listener.address().port );
+var listener = app.listen(process.env.PORT || 8080, process.env.HOST || "0.0.0.0", function() {
+    console.log("Express server started");
 });

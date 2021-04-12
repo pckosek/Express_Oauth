@@ -13,7 +13,6 @@ app.set('trust proxy', 1) // trust first proxy
 
 // -------------- express initialization -------------- //
 
-// Here, we set the port (these settings are specific to our site)
 app.set('view engine', 'hbs');
 
 app.use(cookieSession({

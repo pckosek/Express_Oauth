@@ -19,3 +19,5 @@ Each of these videos demonstrates a step in the Oauth workflow, leading up to 05
 - **04_basic_authenticated_state.js** - Maintinaing an Authenticated State ([LECTURE](https://www.youtube.com/watch?v=qg-SYRGAnD8))
 	
 - **05_minimal_working_oauth.js** - Putting it all together ([LECTURE](https://www.youtube.com/watch?v=o0jFPn3sZgM))
+
+- **06_minimal_refreshing_token.js** - adds middleware to ensure refreshed access token

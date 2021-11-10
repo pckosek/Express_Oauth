@@ -118,7 +118,7 @@ function getUserName(req,res,next) {
 router.get('/logout', function (req, res) {
     
     delete req.session.authenticated;
-    res.redirect('https://mobiledev1.sites.tjhsst.edu/');
+    res.redirect('https://user.tjhsst.edu/pckosek');
 
 });
 
@@ -196,8 +196,7 @@ function retrieveIonId(req,res,next) {
 
 router.get('/login_worker',[convertCodeToToken,setAuthenticated, retrieveIonId], function(req, res) { 
     
-    console.log(req.session.token)
-    res.redirect('./');
+    res.redirect('https://user.tjhsst.edu/pckosek');
     
 });
 

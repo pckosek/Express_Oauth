@@ -1,10 +1,15 @@
 const express = require('express');
 const router = express.Router()
 
-router.get('/', function(req,res){
+const {checkAuthentication} = require('/site/public2/routes/oauth.js')
+
+router.get('/', checkAuthentication, function(req,res){
   
-  res.render('home')
-    
+  if (res.locals.logged_in) {
+    res.render('verified', res.locals)
+  } else {
+      res.render('unverified', res.locals)
+  }
 })
 
 module.exports = router;
